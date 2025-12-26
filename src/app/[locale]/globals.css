@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FCFEFA; /* color #FCFEFA */
+  --foreground: #28019B; /* color #28019B */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #15151E; /* color #15151E */
+    --foreground: #57B7ED; /* color #57B7ED */
+  }
+}
+
+* {
+  box-sizing: border-box; /* Incluye el padding y borde en el ancho total */
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden; /* Evita el desbordamiento horizontal */
+  margin: 0; /* Asegúrate de que el margen del body sea 0 */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.btn-presupuesto {
+  background: linear-gradient(to right, #0037dd, #01677e); /* Degradado */
+  color: white; /* Color de texto */
+  padding: 0.3rem 0.9rem; /* Ajustar el padding para que se vea mejor */
+  border-radius: 9999px; /* Bordes redondeados completos */
+  font-weight: bold; /* Negrita */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el hover */
+  display: inline-flex; /* Para centrar el texto en el botón */
+  align-items: center; /* Centrar verticalmente */
+}
+
+.btn-presupuesto:hover {
+  transform: translateY(-0.25rem); /* Eleva el botón al pasar el mouse */
+}
+
+/* Ejemplo de ajuste de contenedores */
+.container {
+  max-width: 100%; /* Limita el ancho máximo */
+  padding-left: 1rem; /* Padding a la izquierda */
+  padding-right: 1rem; /* Padding a la derecha */
+  margin: 0 auto; /* Centra el contenedor */
+}
+
