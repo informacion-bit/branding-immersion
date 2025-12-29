@@ -55,10 +55,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
-        <link rel="preload" href="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2Fuxui-modal.webp?alt=media&token=8e3c5074-e130-4f0f-b7b9-5fdf017b4fd6" as="image" />
-        <link rel="preload" href="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2Fprogramacion-modal.webp?alt=media&token=17f61474-fea2-4aac-9470-bded43cfa669" as="image" />
-        <link rel="preload" href="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2Fmarketing-modal.webp?alt=media&token=a91b4bc7-ab97-49aa-bede-87480e8c8dc7" as="image" />
-        <link rel="preload" href="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2Fproduccion-modal.webp?alt=media&token=39128a85-5b4f-4d03-9117-9610e6201856" as="image" />
         <Script src="https://www.google.com/recaptcha/enterprise.js?render=6Le4jTksAAAAAE8sQqg3OH4rWp1iMuxTMGdhn9bu" strategy="beforeInteractive" />
       </head>
       <body>

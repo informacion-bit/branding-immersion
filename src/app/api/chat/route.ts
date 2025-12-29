@@ -5,6 +5,7 @@ const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-
 
 export async function POST(req: NextRequest) {
   if (!API_KEY) {
+    console.error("Error en /api/chat: La variable de entorno GEMINI_API_KEY no está configurada.");
     return NextResponse.json({ message: 'Error: La clave de API no está configurada.' }, { status: 500 });
   }
 
@@ -46,7 +47,7 @@ export async function POST(req: NextRequest) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Error en la API de IA:", data);
+      console.error("Respuesta de error detallada de la API de IA:", JSON.stringify(data, null, 2));
       return NextResponse.json({ message: "Lo siento, ha ocurrido un error al contactar a la IA." }, { status: response.status });
     }
 
@@ -55,6 +56,7 @@ export async function POST(req: NextRequest) {
             console.error("Contenido bloqueado por la API de IA:", data.promptFeedback);
             return NextResponse.json({ message: "Lo siento, la respuesta fue bloqueada por nuestros filtros de seguridad." }, { status: 400 });
         }
+        console.error("Respuesta inesperada de la API de IA (sin candidatos):", data);
         return NextResponse.json({ message: "Lo siento, no he podido generar una respuesta." }, { status: 500 });
     }
 
@@ -62,7 +64,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: aiResponse });
 
   } catch (error) {
-    console.error("Error in /api/chat:", error);
+    console.error("Error fatal en el manejador /api/chat:", error);
     return NextResponse.json({ message: "Lo siento, ha ocurrido un error interno." }, { status: 500 });
   }
 }
