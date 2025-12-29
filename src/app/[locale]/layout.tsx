@@ -63,9 +63,6 @@ export default async function LocaleLayout({
             <Analytics />
             <GoogleTagManager gtmId="GTM-W2B58L9J" />
           </main>
-          <footer className="bg-gray-900 text-white text-center py-4">
-            <p>&copy; {new Date().getFullYear()} Immersion Agency. All rights reserved.</p>
-          </footer>
           <ChatbotLoader />
           <SpeedInsights />
         </NextIntlClientProvider>
