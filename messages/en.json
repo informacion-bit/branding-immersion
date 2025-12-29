@@ -115,5 +115,11 @@
     "licensing": "Licenses",
     "contact": "Contact",
     "allRightsReserved": "All Rights Reserved."
+  },
+  "chatbot": {
+      "error": "Sorry, I am having trouble connecting. Please try again later.",
+      "typing": "Sara is typing...",
+      "placeholder": "Type a message...",
+      "send": "Send"
   }
 }

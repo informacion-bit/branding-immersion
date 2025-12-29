@@ -1,8 +1,10 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 
 const Chatbot = () => {
+  const t = useTranslations('chatbot');
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
@@ -56,7 +58,7 @@ const Chatbot = () => {
       setMessages([...newMessages, { role: 'assistant', content: data.message }]);
     } catch (error) {
       console.error('Error sending message:', error);
-      setMessages([...newMessages, { role: 'assistant', content: 'Sorry, I am having trouble connecting. Please try again later.' }]);
+      setMessages([...newMessages, { role: 'assistant', content: t('error') }]);
     } finally {
       setIsLoading(false);
     }
@@ -100,7 +102,7 @@ const Chatbot = () => {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="p-2 rounded-lg bg-gray-200">
-                    Sara is typing...
+                    {t('typing')}
                   </div>
                 </div>
               )}
@@ -115,14 +117,14 @@ const Chatbot = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder={language === 'es' ? 'Escribe un mensaje...' : 'Type a message...'}
+                placeholder={t('placeholder')}
               />
               <button
                 className="bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-700"
                 onClick={handleSendMessage}
                 disabled={isLoading}
               >
-                {language === 'es' ? 'Enviar' : 'Send'}
+                {t('send')}
               </button>
             </div>
           </div>
