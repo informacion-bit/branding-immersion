@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import "./globals.css"; // Mantén el CSS global
-import { NextIntlClientProvider } from 'next-intl'; // Proveedor de internacionalización
-import { getMessages } from 'next-intl/server'; // Obtención de mensajes
-import Navbar from '@/components/Navbar'; // Componente Navbar
+import "./globals.css";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import Navbar from '@/components/Navbar';
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from '@vercel/analytics/next';
-import { GoogleTagManager } from '@next/third-parties/google'
-
-
+import { GoogleTagManager } from '@next/third-parties/google';
+import ChatbotLoader from '@/components/ChatbotLoader';
 
 // Metadatos optimizados
 export const metadata: Metadata = {
@@ -47,44 +46,27 @@ export const metadata: Metadata = {
 // Componente principal del layout con manejo de locales
 export default async function LocaleLayout({
   children,
-  params,
+  params: { locale },
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale } = await params; // Resuelve la promesa y extrae el locale
-
-  let messages;
-  try {
-    messages = await getMessages({ locale });
-  } catch (error) {
-    console.error(`Error fetching messages for locale '${locale}':`, error);
-    messages = await getMessages({ locale: "es" }); // Carga mensajes predeterminados
-  }
+  const messages = await getMessages({ locale });
 
   return (
     <html lang={locale}>
-      <head>
-        {/* Preload para recursos críticos */}
-        <link
-          rel="preload"
-          href="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FLOGO%20REDUCCION%20NEGATIVO.svg?alt=media&token=383bd9fc-02d5-4084-8614-15c7ce35bdd2"
-          as="image"
-        />
-      </head>
       <body>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar />
           <main className="min-h-screen">
             {children}
-             <Analytics />
-                   <GoogleTagManager gtmId="GTM-W2B58L9J" />
-
-
+            <Analytics />
+            <GoogleTagManager gtmId="GTM-W2B58L9J" />
           </main>
           <footer className="bg-gray-900 text-white text-center py-4">
             <p>&copy; {new Date().getFullYear()} Immersion Agency. All rights reserved.</p>
           </footer>
+          <ChatbotLoader />
           <SpeedInsights />
         </NextIntlClientProvider>
       </body>

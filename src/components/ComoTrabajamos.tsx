@@ -1,3 +1,4 @@
+'use client';
 // src/components/ComoTrabajamos.tsx
 
 import Image from "next/image";
@@ -58,6 +59,7 @@ export default function ComoTrabajamos() {
                                     height={60}
                                     alt={`Imagen ${index + 1}`}
                                     className="mb-4 object-contain"
+                                    style={{ height: 'auto' }}
                                 />
                                 <h3 className="font-semibold text-slate-200">{item.title}</h3>
                                 <ul className="text-start text-slate-200 mt-4">
