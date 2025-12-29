@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: "https://www.immersionagency.com",
     images: [
       {
-        url: "https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FLOGO%20REDUCCION%20NEGATIVO.svg?alt=media&token=383bd9fc-02d5-4084-8614-15c7ce35bdd2",
+        url: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FLOGO%20REDUCCION%20NEGATIVO.svg?alt=media&token=383bd9fc-02d5-4084-8614-15c7ce35bdd2",
         width: 1200,
         height: 630,
         alt: "Immersion Agency Logo",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: "Immersion Agency",
     description: "Transformamos datos en estrategias para el crecimiento digital.",
     images: [
-      "https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FLOGO%20REDUCCION%20NEGATIVO.svg?alt=media&token=383bd9fc-02d5-4084-8614-15c7ce35bdd2",
+      "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FLOGO%20REDUCCION%20NEGATIVO.svg?alt=media&token=383bd9fc-02d5-4084-8614-15c7ce35bdd2",
     ],
   },
   icons: {
