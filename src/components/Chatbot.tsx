@@ -69,9 +69,9 @@ const Chatbot = () => {
 
 
   return (
-    <div className="z-50">
+    <div className="z-[9999]">
       <button
-        className="fixed bottom-4 right-4 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-50"
+        className="fixed bottom-4 right-4 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-colors z-[9999]"
         onClick={() => setIsOpen(!isOpen)}
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -80,7 +80,7 @@ const Chatbot = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-20 right-4 w-80 h-96 bg-white rounded-lg shadow-xl flex flex-col z-50">
+        <div className="fixed bottom-20 right-4 w-80 h-96 bg-white rounded-lg shadow-xl flex flex-col z-[9999]">
           <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
             <h3 className="text-lg font-semibold">Sara</h3>
             <div className="flex space-x-2">
