@@ -3,8 +3,6 @@ import "./globals.css";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import Navbar from '@/components/Navbar';
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from '@vercel/analytics/next';
 import { GoogleTagManager } from '@next/third-parties/google';
 import ChatbotLoader from '@/components/ChatbotLoader';
 import Script from 'next/script';
@@ -68,11 +66,9 @@ export default async function LocaleLayout({
           <Navbar />
           <main className="min-h-screen">
             {children}
-            <Analytics />
             <GoogleTagManager gtmId="GTM-W2B58L9J" />
           </main>
           <ChatbotLoader />
-          <SpeedInsights />
         </NextIntlClientProvider>
       </body>
     </html>

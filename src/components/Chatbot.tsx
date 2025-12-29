@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 
 const Chatbot = () => {
-  const t = useTranslations('chatbot');
+  const t = useTranslations('chatbot';
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
@@ -22,7 +22,7 @@ const Chatbot = () => {
 
   useEffect(() => {
     if (language) {
-      fetch(`components/chatbot_prompt_${language}.txt`)
+      fetch(`/chatbot_prompt_${language}.txt`)
         .then(response => response.text())
         .then(text => setPrompt(text))
         .catch(error => console.error('Error fetching prompt:', error));
