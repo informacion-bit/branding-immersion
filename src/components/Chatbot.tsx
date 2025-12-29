@@ -8,14 +8,24 @@ const Chatbot = () => {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
+  const [language, setLanguage] = useState('en'); // Default to English
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch('components/chatbot_prompt.txt')
-      .then(response => response.text())
-      .then(text => setPrompt(text));
+    // Detect language from URL
+    const lang = window.location.pathname.split('/')[1] || 'en';
+    setLanguage(lang);
   }, []);
+
+  useEffect(() => {
+    if (language) {
+      fetch(`components/chatbot_prompt_${language}.txt`)
+        .then(response => response.text())
+        .then(text => setPrompt(text))
+        .catch(error => console.error('Error fetching prompt:', error));
+    }
+  }, [language]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -52,6 +62,12 @@ const Chatbot = () => {
     }
   };
 
+  const handleLanguageSelect = (lang: string) => {
+    setLanguage(lang);
+    setMessages([]); // Clear messages when language changes
+  };
+
+
   return (
     <div>
       <button
@@ -65,8 +81,12 @@ const Chatbot = () => {
 
       {isOpen && (
         <div className="fixed bottom-20 right-4 w-80 h-96 bg-white rounded-lg shadow-xl flex flex-col">
-          <div className="bg-blue-600 text-white p-4 rounded-t-lg">
-            <h3 className="text-lg font-semibold">IAmigo</h3>
+          <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+            <h3 className="text-lg font-semibold">Sara</h3>
+            <div className="flex space-x-2">
+              <button onClick={() => handleLanguageSelect('es')} className={`px-2 py-1 text-sm rounded ${language === 'es' ? 'bg-white text-blue-600' : 'bg-transparent text-white'}`}>ES</button>
+              <button onClick={() => handleLanguageSelect('en')} className={`px-2 py-1 text-sm rounded ${language === 'en' ? 'bg-white text-blue-600' : 'bg-transparent text-white'}`}>EN</button>
+            </div>
           </div>
           <div className="flex-1 p-4 overflow-y-auto">
             <div className="flex flex-col space-y-2">
@@ -80,7 +100,7 @@ const Chatbot = () => {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="p-2 rounded-lg bg-gray-200">
-                    IAmigo is typing...
+                    Sara is typing...
                   </div>
                 </div>
               )}
@@ -95,14 +115,14 @@ const Chatbot = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                placeholder="Type a message..."
+                placeholder={language === 'es' ? 'Escribe un mensaje...' : 'Type a message...'}
               />
               <button
                 className="bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-700"
                 onClick={handleSendMessage}
                 disabled={isLoading}
               >
-                Send
+                {language === 'es' ? 'Enviar' : 'Send'}
               </button>
             </div>
           </div>
