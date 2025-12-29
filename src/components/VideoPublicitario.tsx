@@ -50,7 +50,7 @@ export default function Video() {
           onClick={togglePlay}
         >
           <source
-            src="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FIMMERSION%20Video%20de%20clientes%20-%20Horizontal.mp4?alt=media&token=27638f36-fbb9-47ad-9f2c-6a4d7586ed77"
+            src="https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FIMMERSION%20Video%20de%20clientes%20-%20Horizontal.mp4?alt=media&token=27638f36-fbb9-47ad-9f2c-6a4d7586ed77"
             type="video/mp4"
           />
         </video>
