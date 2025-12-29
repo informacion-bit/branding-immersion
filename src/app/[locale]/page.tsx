@@ -27,10 +27,10 @@ interface DecorativeImageProps {
 // Constants with type definitions
 const GTAG_ID: string = 'G-NXXTEYLQ3N';
 const IMAGES: Record<string, string> = {
-  astronaut: "https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FAdobeStock_532826579.svg?alt=media&token=2f3b1cc9-4c9d-44db-b3c1-010c33ce15a6",
-  leftDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FEllipse%203.svg?alt=media&token=3f210f81-8ca3-472c-ba22-b3e73c3ac5fb",
-  additionalDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FEllipse%202%20(2).svg?alt=media&token=267d096a-8e96-48ec-b01a-0e2bbf4759d6",
-  rightDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FEllipse%201.svg?alt=media&token=cf1506fa-e0ca-4923-8829-9dee3add13e4"
+  astronaut: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FAdobeStock_532826579.svg?alt=media&token=2f3b1cc9-4c9d-44db-b3c1-010c33ce15a6",
+  leftDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FEllipse%203.svg?alt=media&token=3f210f81-8ca3-472c-ba22-b3e73c3ac5fb",
+  additionalDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FEllipse%202%20(2).svg?alt=media&token=267d096a-8e96-48ec-b01a-0e2bbf4759d6",
+  rightDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FEllipse%201.svg?alt=media&token=cf1506fa-e0ca-4923-8829-9dee3add13e4"
 };
 
 // Reusable image component with types
