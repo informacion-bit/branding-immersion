@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export default function Gratitude() {
   const t = useTranslations('gratitude');
@@ -12,12 +13,12 @@ export default function Gratitude() {
         <p className="text-gray-700 mb-6 text-lg leading-relaxed">
           {t('description')}
         </p>
-        <a
+        <Link
           href="/"
           className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           {t('backToHome')}
-        </a>
+        </Link>
       </div>
     </div>
   );

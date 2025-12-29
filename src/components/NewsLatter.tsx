@@ -1,7 +1,7 @@
 // src/components/NewsLatter.tsx
 'use client';
 
-import { db } from '../app/firebaseConfig';
+import { db } from '@/app/[locale]/firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';

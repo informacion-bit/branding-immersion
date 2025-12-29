@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "../globals.css"; // Mantén el CSS global
+import "./globals.css"; // Mantén el CSS global
 import { NextIntlClientProvider } from 'next-intl'; // Proveedor de internacionalización
 import { getMessages } from 'next-intl/server'; // Obtención de mensajes
 import Navbar from '@/components/Navbar'; // Componente Navbar

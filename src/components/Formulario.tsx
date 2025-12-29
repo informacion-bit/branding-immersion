@@ -3,8 +3,9 @@
 import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import { collection, addDoc } from 'firebase/firestore';
+import { logEvent } from "firebase/analytics";
 import { useRouter } from 'next/navigation';
-import { db } from '../app/firebaseConfig';
+import { db, analytics } from '@/app/[locale]/firebaseConfig';
 import emailjs from '@emailjs/browser';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
@@ -113,6 +114,14 @@ export default function Formulario() {
         ...formData,
         contactType,
       };
+
+      // Log event to Firebase Analytics if analytics is available (client-side)
+      if (analytics) {
+        logEvent(analytics, 'form_submission', {
+          form_name: 'contact',
+          contact_type: contactType,
+        });
+      }
 
       // Submit data to Firestore and send email in parallel
       await Promise.all([

@@ -1,6 +1,9 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
+import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,9 +28,9 @@ const eslintConfig = [
       },
     },
     plugins: {
-      "@typescript-eslint": require("@typescript-eslint/eslint-plugin"), // Plugin para TS
-      react: require("eslint-plugin-react"), // Plugin para React
-      "react-hooks": require("eslint-plugin-react-hooks"), // Reglas de hooks de React
+      "@typescript-eslint": typescriptEslintPlugin,
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
     },
     rules: {
       "react/react-in-jsx-scope": "off", // No necesario en Next.js

@@ -18,10 +18,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase services
-const analytics = getAnalytics(app); // Initialize Analytics
-const db = getFirestore(app); // Initialize Firestore
-const storage = getStorage(app); // Initialize Storage
+// Initialize Firestore and Storage (safe on server)
+const db = getFirestore(app);
+const storage = getStorage(app);
 
-// Export instances of Firestore, Storage, and Analytics
+// Conditionally initialize Analytics only in the browser
+const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+
+// Export instances
 export { db, storage, analytics };
