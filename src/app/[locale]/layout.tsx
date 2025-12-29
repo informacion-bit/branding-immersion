@@ -1,3 +1,4 @@
+'use client';
 import type { Metadata } from "next";
 import "./globals.css";
 import { NextIntlClientProvider } from 'next-intl';
@@ -7,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from '@vercel/analytics/next';
 import { GoogleTagManager } from '@next/third-parties/google';
 import ChatbotLoader from '@/components/ChatbotLoader';
+import Script from 'next/script';
 
 // Metadatos optimizados
 export const metadata: Metadata = {
@@ -55,6 +57,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <head>
+        <Script src="https://www.google.com/recaptcha/enterprise.js?render=6Le4jTksAAAAAE8sQqg3OH4rWp1iMuxTMGdhn9bu" strategy="beforeInteractive" />
+      </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar />
