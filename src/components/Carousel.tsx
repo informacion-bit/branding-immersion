@@ -62,6 +62,7 @@ const Carousel: React.FC = () => {
       {/* Imagen actual */}
       <div className="relative h-full overflow-hidden rounded-lg">
         <Image
+          key={`desktop-${currentIndex}`}
           src={currentImage.desktop}
           alt={currentImage.alt}
           className="hidden md:block object-cover"
@@ -71,6 +72,7 @@ const Carousel: React.FC = () => {
           loading={currentIndex === 0 ? 'eager' : 'lazy'}
         />
         <Image
+          key={`mobile-${currentIndex}`}
           src={currentImage.mobile}
           alt={currentImage.alt}
           className="md:hidden object-cover"
@@ -92,13 +94,13 @@ const Carousel: React.FC = () => {
       {/* Botones de navegación */}
       <button
         onClick={() => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-30 p-3 rounded-full hover:bg-opacity-50 transition-opacity"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-30 p-3 rounded-full hover:bg-opacity-50 transition-opacity z-10"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
       </button>
       <button
         onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-30 p-3 rounded-full hover:bg-opacity-50 transition-opacity"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black bg-opacity-30 p-3 rounded-full hover:bg-opacity-50 transition-opacity z-10"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
       </button>
