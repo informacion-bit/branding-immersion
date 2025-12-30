@@ -1,26 +1,24 @@
-# Settings for Backend (on Cloud Run).
-# See https://firebase.google.com/docs/app-hosting/configure#cloud-run
+
+# Specifies the version of the App Hosting YAML schema.
+specVersion: v1alpha1
+
+# Defines the runtime configuration for the application.
 runConfig:
   minInstances: 0
-  # maxInstances: 100
-  # concurrency: 80
-  # cpu: 1
-  # memoryMiB: 512
 
-  # Environment variables and secrets.
-  # env:
-  # Configure environment variables.
-  # See https://firebase.google.com/docs/app-hosting/configure#user-defined-environment
-  # - variable: MESSAGE
-  #   value: Hello world!
-  #   availability:
-  #     - BUILD
-  #     - RUNTIME
-
-  # Grant access to secrets in Cloud Secret Manager.
-  # See https://firebase.google.com/docs/app-hosting/configure#secret-parameters
-  # - variable: MY_SECRET
-  #   secret: mySecretRef
+# Defines environment variables for the application.
 env:
   - variable: GEMINI_API_KEY
     secret: GEMINI_API_KEY
+
+# Defines the build process for the application.
+build:
+  # Specifies the command to build the application.
+  run: npm run build
+  # Specifies the output directory of the build process.
+  outputDir: .next
+
+# Defines the runtime configuration for the application.
+run:
+  # Specifies the command to start the application server.
+  run: npm run start
