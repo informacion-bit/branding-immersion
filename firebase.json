@@ -7,7 +7,7 @@
       "**/node_modules/**"
     ],
     "frameworksBackend": {
-      "region": "us-central1",
+      "region": "us-east5",
       "maxInstances": 10
     },
     "rewrites": [
@@ -15,7 +15,7 @@
         "source": "/api/**",
         "run": {
           "serviceId": "branding-immersion",
-          "region": "us-central1"
+          "region": "us-east5"
         }
       }
     ]
