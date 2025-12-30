@@ -8,7 +8,6 @@ build:
   # Specifies the output directory of the build process.
   outputDir: .next
 
-# Defines the runtime configuration for the application.
 run:
   # Specifies the command to start the application server.
   run: npm run start
