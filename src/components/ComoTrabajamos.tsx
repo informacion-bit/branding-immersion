@@ -5,12 +5,14 @@ import Image from "next/image";
 import { CheckBadgeIcon } from "@heroicons/react/16/solid";
 import { useTranslations } from "next-intl";
 
+const GCS_BUCKET_URL = "https://storage.googleapis.com/immersion-005-7e407.appspot.com/imagenesImmersion";
+
 export default function ComoTrabajamos() {
     const t = useTranslations("common");
 
     const items = [
         {
-            src: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FPen-Tool--Streamline-Flex.svg?alt=media&token=335ca938-d9bc-41d0-9c0c-bb5f59f5e41f',
+            src: `${GCS_BUCKET_URL}/Pen-Tool--Streamline-Flex.svg`,
             title: t("designImplement"),
             items: [
                 t("basedOnData"),
@@ -18,7 +20,7 @@ export default function ComoTrabajamos() {
             ],
         },
         {
-            src: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2Fdefinition-search-book.svg?alt=media&token=03273cfd-c7e9-4982-a3f2-8ce5e7df0af4',
+            src: `${GCS_BUCKET_URL}/definition-search-book.svg`,
             title: t("analyze"),
             items: [
                 t("analyzeData"),
@@ -26,7 +28,7 @@ export default function ComoTrabajamos() {
             ],
         },
         {
-            src: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FSun--Streamline-Flex.svg?alt=media&token=0d007e51-ce9b-48a4-b420-e035ae9328c5',
+            src: `${GCS_BUCKET_URL}/Sun--Streamline-Flex.svg`,
             title: t("optimize"),
             items: [
                 t("identifyImprovementAreas"),
@@ -34,7 +36,7 @@ export default function ComoTrabajamos() {
             ],
         },
         {
-            src: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2Frotate-left.svg?alt=media&token=44650864-6ba4-4bbd-8fff-4b26328334dd',
+            src: `${GCS_BUCKET_URL}/rotate-left.svg`,
             title: t("createCycles"),
             items: [
                 t("createContinuousCycles"),

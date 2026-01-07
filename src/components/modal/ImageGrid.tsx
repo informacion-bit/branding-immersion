@@ -14,44 +14,46 @@ interface ModalContent {
   type: string;
 }
 
+const GCS_BUCKET_URL = "https://storage.googleapis.com/immersion-005-7e407.appspot.com/imagenesImmersion";
+
 // Datos de imÃ¡genes y contenido del modal
 const images = [
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FFrame%206%20(2).svg?alt=media&token=9a2b756d-942d-4ed3-97f2-94387433b464',
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FFrame%206%20(1).svg?alt=media&token=4898c433-8fad-4e1d-ae88-69ce73a21dd6',
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FFrame%207.svg?alt=media&token=b97b97b0-81ea-4786-b1b3-4646540eaf2a',
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FFrame%206.svg?alt=media&token=b3923b23-9174-4cd2-92ce-7f345d04a2b6',
+  `${GCS_BUCKET_URL}/Frame%206%20(2).svg`,
+  `${GCS_BUCKET_URL}/Frame%206%20(1).svg`,
+  `${GCS_BUCKET_URL}/Frame%207.svg`,
+  `${GCS_BUCKET_URL}/Frame%206.svg`,
 ];
 
 const imageHover = [
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FUx-ui.svg?alt=media&token=4347576b-fe8e-483f-9695-1c4129af6223',
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FMarketing%20(2).svg?alt=media&token=35ef4c26-25c4-4160-9097-3f217e6996fc',
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FProgramacion.svg?alt=media&token=8eabbf0e-f3f7-41e2-90bc-500f9508e07c',
-  'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FFrame%206%20(3).svg?alt=media&token=d6eb155b-266e-4f7c-a8cf-71779c5a2a28',
+  `${GCS_BUCKET_URL}/Ux-ui.svg`,
+  `${GCS_BUCKET_URL}/Marketing%20(2).svg`,
+  `${GCS_BUCKET_URL}/Programacion.svg`,
+  `${GCS_BUCKET_URL}/Frame%206%20(3).svg`,
 ];
 
 const modalContent: ModalContent[] = [
   {
     title: 'titulo1',
     content: 'contenido1',
-    backgroundImage: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2Fuxui-modal.webp?alt=media&token=8e3c5074-e130-4f0f-b7b9-5fdf017b4fd6',
+    backgroundImage: `${GCS_BUCKET_URL}/uxui-modal.webp`,
     type: 'tipo1',
   },
   {
     title: 'titulo2',
     content: 'contenido2',
-    backgroundImage: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2Fprogramacion-modal.webp?alt=media&token=17f61474-fea2-4aac-9470-bded43cfa669',
+    backgroundImage: `${GCS_BUCKET_URL}/programacion-modal.webp`,
     type: 'tipo2',
   },
   {
     title: 'titulo3',
     content: 'contenido3',
-    backgroundImage: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2Fmarketing-modal.webp?alt=media&token=a91b4bc7-ab97-49aa-bede-87480e8c8dc7',
+    backgroundImage: `${GCS_BUCKET_URL}/marketing-modal.webp`,
     type: 'tipo3',
   },
   {
     title: 'titulo4',
     content: 'contenido4',
-    backgroundImage: 'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2Fproduccion-modal.webp?alt=media&token=39128a85-5b4f-4d03-9117-9610e6201856',
+    backgroundImage: `${GCS_BUCKET_URL}/produccion-modal.webp`,
     type: 'tipo4',
   },
 ];

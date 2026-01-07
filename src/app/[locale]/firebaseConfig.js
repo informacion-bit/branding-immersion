@@ -1,8 +1,8 @@
 // Import the necessary functions from Firebase SDKs
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
 import { getStorage } from 'firebase/storage';
+import { getAnalytics } from "firebase/analytics";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,15 +15,19 @@ const firebaseConfig = {
   measurementId: "G-EPRWKJ513H"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase App
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-// Initialize Firestore and Storage (safe on server)
-const db = getFirestore(app);
-const storage = getStorage(app);
+// Functions to get Firestore and Storage instances
+const getDb = () => getFirestore(app);
+const getStorageInstance = () => getStorage(app);
 
-// Conditionally initialize Analytics only in the browser
-const analytics = typeof window !== 'undefined' ? getAnalytics(app) : null;
+// Function to get Analytics instance (only on client-side)
+const getAnalyticsInstance = () => {
+    if (typeof window !== 'undefined') {
+        return getAnalytics(app);
+    }
+    return null;
+}
 
-// Export instances
-export { db, storage, analytics };
+export { app, getDb, getStorageInstance, getAnalyticsInstance };

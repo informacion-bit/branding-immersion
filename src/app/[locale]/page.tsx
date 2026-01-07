@@ -1,8 +1,9 @@
 'use client';
 import Image from 'next/image';
 import Script from 'next/script';
+import dynamic from 'next/dynamic'; // Import dynamic
 
-// Direct imports instead of dynamic
+// Components that are safe for direct import
 import Carousel from '@/components/Carousel';
 import NuestroEquipo from '@/components/NuestroEquipo';
 import ImageGrid from '@/components/modal/ImageGrid';
@@ -10,10 +11,17 @@ import ComoTrabajamos from '@/components/ComoTrabajamos';
 import PorqueImmersion from '@/components/PorqueImmersion';
 import MisionVision from '@/components/MisionVision';
 import VideoPublicitario from '@/components/VideoPublicitario';
-import Formulario from '@/components/Formulario';
 import NewsLatter from '@/components/NewsLatter';
 import Footer from '@/components/Footer';
 import { JSX } from 'react';
+
+// Dynamically import the Formulario component with SSR turned off
+const Formulario = dynamic(() => import('@/components/Formulario'), {
+  ssr: false,
+  loading: () => <p>Loading form...</p>,
+});
+
+const GCS_BUCKET_URL = "https://storage.googleapis.com/immersion-005-7e407.appspot.com/imagenesImmersion";
 
 // Define interfaces
 interface DecorativeImageProps {
@@ -21,16 +29,16 @@ interface DecorativeImageProps {
   alt: string;
   className: string;
   transform?: string;
-  [key: string]: unknown; // Use unknown for additional props
+  [key: string]: unknown;
 }
 
 // Constants with type definitions
 const GTAG_ID: string = 'G-NXXTEYLQ3N';
 const IMAGES: Record<string, string> = {
-  astronaut: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FAdobeStock_532826579.svg?alt=media&token=2f3b1cc9-4c9d-44db-b3c1-010c33ce15a6",
-  leftDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FEllipse%203.svg?alt=media&token=3f210f81-8ca3-472c-ba22-b3e73c3ac5fb",
-  additionalDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FEllipse%202%20(2).svg?alt=media&token=267d096a-8e96-48ec-b01a-0e2bbf4759d6",
-  rightDecor: "https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FEllipse%201.svg?alt=media&token=cf1506fa-e0ca-4923-8829-9dee3add13e4"
+  astronaut: `${GCS_BUCKET_URL}/AdobeStock_532826579.svg`,
+  leftDecor: `${GCS_BUCKET_URL}/Ellipse%203.svg`,
+  additionalDecor: `${GCS_BUCKET_URL}/Ellipse%202%20(2).svg`,
+  rightDecor: `${GCS_BUCKET_URL}/Ellipse%201.svg`
 };
 
 // Reusable image component with types
@@ -43,7 +51,7 @@ const DecorativeImage: React.FC<DecorativeImageProps> = ({ src, alt, className, 
       height={500}
       loading="lazy"
       className={`object-contain pointer-events-none w-[200%] ${transform || ''}`}
-      {...(props as Record<string, string>)} // Use explicit casting if necessary
+      {...(props as Record<string, string>)}
     />
   </div>
 );
@@ -77,7 +85,6 @@ export default function HomePage(): JSX.Element {
         />
       </div>
 
-      {/* Decorative images */}
       <DecorativeImage
         src={IMAGES.leftDecor}
         alt="Fondo decorativo izquierdo"

@@ -1,11 +1,22 @@
-// src/components/PorqueImmersion.tsx
+'use client';
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useState, useEffect } from 'react';
 
+const GCS_BUCKET_URL = "https://storage.googleapis.com/immersion-005-7e407.appspot.com/imagenesImmersion";
 
 export default function PorqueImmersion() {
     const t = useTranslations("porque");
+    const [hasMounted, setHasMounted] = useState(false);
+
+    useEffect(() => {
+        setHasMounted(true);
+    }, []);
+
+    if (!hasMounted) {
+        return null;
+    }
 
     return (
         <div>
@@ -23,7 +34,7 @@ export default function PorqueImmersion() {
                         {/* Imagen colocada al lado de la lista */}
                         <div className="flex flex-col items-center p-4 md:w-1/3">
                             <Image
-                                src={'https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FVector.svg?alt=media&token=a974b079-d61a-4c18-94e5-ea92a16d60ee'}
+                                src={`${GCS_BUCKET_URL}/Vector.svg`}
                                 width={300}
                                 height={300}
                                 className="mb-4"

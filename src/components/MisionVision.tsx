@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
+const GCS_BUCKET_URL = "https://storage.googleapis.com/immersion-005-7e407.appspot.com/imagenesImmersion";
+
 export default function MisionVision() {
     const t = useTranslations("mision");
 
@@ -17,7 +19,7 @@ export default function MisionVision() {
                         {/* Imagen colocada al lado de la lista */}
                         <div className="flex flex-col items-center md:w-1/3">
                             <Image
-                                src={'https://firebasestorage.googleapis.com/v0/b/immersion-3a085.appspot.com/o/imagenesImmersion%2FVector%20(1).svg?alt=media&token=d005312c-b542-488c-874b-3d2e22d1d16d'}
+                                src={`${GCS_BUCKET_URL}/Vector%20(1).svg`}
                                 width={300}
                                 height={300}
                                 alt="Imagen de MisiÃ³n y VisiÃ³n"

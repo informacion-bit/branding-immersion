@@ -7,7 +7,6 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   // Configuración de imágenes
   images: {
-    domains: ['firebasestorage.googleapis.com'], // Permitir imágenes de Firebase
     dangerouslyAllowSVG: true, // Habilitar SVG
     remotePatterns: [
       {

@@ -1,38 +1,41 @@
-// src/components/NewsLatter.tsx
 'use client';
 
-import { db } from '@/app/[locale]/firebaseConfig';
-import { collection, addDoc } from 'firebase/firestore';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { Timestamp } from 'firebase/firestore'; // Importar Timestamp
+
+// No static imports from firebase
 
 export default function NewsLatter() {
-    const t = useTranslations(); // Hook para traducción
-    const [email, setEmail] = useState(''); // Estado para almacenar el email
-    const [error, setError] = useState(''); // Estado para almacenar errores
-    const [success, setSuccess] = useState(''); // Estado para almacenar mensaje de éxito
+    const t = useTranslations();
+    const [email, setEmail] = useState('');
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+        e.preventDefault();
 
         if (!email) {
-            setError(t('newsletter.emailRequired')); // Mensaje de error si el email está vacío
+            setError(t('newsletter.emailRequired'));
             return;
         }
 
         try {
-            // Guardar el email y la fecha en Firestore
+            // Dynamically import firebase modules only on the client-side
+            const { getDb } = await import('@/app/[locale]/firebaseConfig');
+            const { collection, addDoc, Timestamp } = await import('firebase/firestore');
+            const db = getDb();
+
             await addDoc(collection(db, 'subscribers'), {
                 email,
-                createdAt: Timestamp.fromDate(new Date()) // Guardar la fecha actual
+                createdAt: Timestamp.fromDate(new Date())
             });
-            setSuccess(t('newsletter.subscriptionSuccess')); // Mensaje de éxito
-            setEmail(''); // Limpiar el campo de email
-            setError(''); // Limpiar errores
+            
+            setSuccess(t('newsletter.subscriptionSuccess'));
+            setEmail('');
+            setError('');
         } catch (err) {
-            setError(t('newsletter.subscriptionError')); // Mensaje de error en caso de fallo
+            setError(t('newsletter.subscriptionError'));
             console.error('Error al agregar el documento: ', err);
         }
     };
@@ -80,8 +83,8 @@ export default function NewsLatter() {
                                 {t('newsletter.subscribe')}
                             </button>
                         </div>
-                        {error && <p className="text-red-500">{error}</p>} {/* Mostrar mensaje de error */}
-                        {success && <p className="text-green-500">{success}</p>} {/* Mostrar mensaje de éxito */}
+                        {error && <p className="text-red-500">{error}</p>}
+                        {success && <p className="text-green-500">{success}</p>}
                     </form>
                 </div>
             </div>

@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
+const GCS_BUCKET_URL = "https://storage.googleapis.com/immersion-005-7e407.appspot.com/imagenesImmersion";
+
 export default function Footer() {
     const t = useTranslations('footer'); // Define the scope for translations
 
@@ -43,7 +45,7 @@ export default function Footer() {
                     >
                         <Image
                             alt="Immersion logo"
-                            src="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2FGroup%20(1).svg?alt=media&token=f5cb6700-36a5-4511-90b4-c7f6d34096de"
+                            src={`${GCS_BUCKET_URL}/Group%20(1).svg`}
                             width={200}
                             height={200}
                             priority
@@ -54,12 +56,12 @@ export default function Footer() {
                     <div className="flex">
                         <SocialIcon
                             href="https://www.instagram.com/immersion.md/?igsh=MTl2eHZiYm5zYnNucA%3D%3D"
-                            src="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2Fsocial.png?alt=media&token=6ec1387b-c12d-463f-abd7-45290911109a"
+                            src={`${GCS_BUCKET_URL}/social.png`}
                             alt="Instagram icon"
                         />
                         <SocialIcon
                             href="https://www.linkedin.com/company/immersion-digital-marketing/about/?viewAsMember=true"
-                            src="https://firebasestorage.googleapis.com/v0/b/immersion-005-7e407.appspot.com/o/imagenesImmersion%2Flinkedin.png?alt=media&token=0afa73b7-663f-464d-bd44-3ce479c28f7c"
+                            src={`${GCS_BUCKET_URL}/linkedin.png`}
                             alt="LinkedIn icon"
                         />
                     </div>

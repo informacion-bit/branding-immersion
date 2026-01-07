@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Handler para peticiones GET (para depuración)
+export async function GET(req: NextRequest) {
+  return NextResponse.json({ message: "La API del chat está activa. Use POST para enviar mensajes." });
+}
+
 const API_KEY = process.env.GEMINI_API_KEY;
 const API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`;
 

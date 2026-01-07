@@ -2,14 +2,11 @@
 
 import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
-import { collection, addDoc } from 'firebase/firestore';
-import { logEvent } from "firebase/analytics";
 import { useRouter } from 'next/navigation';
-import { db, analytics } from '@/app/[locale]/firebaseConfig';
 import emailjs from '@emailjs/browser';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-// Define the type for contact type: either 'persona' or 'empresa'
+// Define the type for contact type
 type ContactType = 'persona' | 'empresa';
 
 // Define the structure of the form data
@@ -53,15 +50,14 @@ const EMAIL_CONFIG = {
 } as const;
 
 export default function Formulario() {
-  const t = useTranslations('formulario'); // Translation function
-  const router = useRouter(); // Next.js router for navigation
+  const t = useTranslations('formulario');
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM_STATE);
-  const [contactType, setContactType] = useState<ContactType>('persona'); // Track selected contact type
-  const [error, setError] = useState<string | null>(null); // Error message state
-  const [success, setSuccess] = useState<string | null>(null); // Success message state
-  const [isSubmitting, setIsSubmitting] = useState(false); // Submission loading state
+  const [contactType, setContactType] = useState<ContactType>('persona');
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Handle changes to input fields
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
@@ -70,18 +66,16 @@ export default function Formulario() {
     []
   );
 
-  // Validate form fields
   const validateFields = useCallback(() => {
     if (!formData.nombreApellido || !formData.email || !formData.service) {
-      return t('requiredFieldsError'); // Error for missing required fields
+      return t('requiredFieldsError');
     }
     if (contactType === 'empresa' && (!formData.nombreEmpresa || !formData.cuilEmpresa)) {
-      return t('companyFieldsError'); // Error for missing company-specific fields
+      return t('companyFieldsError');
     }
-    return null; // No validation errors
+    return null;
   }, [formData, contactType, t]);
 
-  // Send email using EmailJS
   const sendEmail = useCallback(async (finalFormData: FormData & { contactType: ContactType }) => {
     try {
       await emailjs.send(
@@ -96,26 +90,32 @@ export default function Formulario() {
     }
   }, []);
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     setError(null);
     setSuccess(null);
-    setIsSubmitting(true); // Show loading state
+    setIsSubmitting(true);
 
     try {
-      const validationError = validateFields(); // Validate the form
+      const validationError = validateFields();
       if (validationError) {
         setError(validationError);
+        setIsSubmitting(false);
         return;
       }
+
+      const { getDb, getAnalyticsInstance } = await import('@/app/[locale]/firebaseConfig');
+      const { collection, addDoc } = await import('firebase/firestore');
+      const { logEvent } = await import('firebase/analytics');
+      
+      const db = getDb();
+      const analytics = getAnalyticsInstance();
 
       const finalFormData = {
         ...formData,
         contactType,
       };
 
-      // Log event to Firebase Analytics if analytics is available (client-side)
       if (analytics) {
         logEvent(analytics, 'form_submission', {
           form_name: 'contact',
@@ -123,26 +123,23 @@ export default function Formulario() {
         });
       }
 
-      // Submit data to Firestore and send email in parallel
       await Promise.all([
         addDoc(collection(db, 'formSubmissions'), finalFormData),
         sendEmail(finalFormData),
       ]);
 
-      setSuccess(t('formSentSuccess')); // Show success message
-      setFormData(INITIAL_FORM_STATE); // Reset form
+      setSuccess(t('formSentSuccess'));
+      setFormData(INITIAL_FORM_STATE);
 
-      // Redirect to gracias page
       router.push('/gracias');
     } catch (err) {
       console.error('Form submission failed:', err);
-      setError(t('formSendError')); // Show error message
+      setError(t('formSendError'));
     } finally {
-      setIsSubmitting(false); // Reset loading state
+      setIsSubmitting(false);
     }
   };
 
-  // Render input fields dynamically
   const renderField = useCallback(
     ({ label, name, type = 'text', required = false, placeholder }: {
       label: string;
@@ -174,7 +171,6 @@ export default function Formulario() {
     <div className="mt-12 flex flex-col items-center">
       <div className="relative z-10 max-w-2xl w-full px-6 lg:max-w-7xl lg:px-8 p-4 bg-white bg-opacity-10 backdrop-blur-lg rounded-md">
         <form className="container space-y-6" onSubmit={handleSubmit}>
-          {/* Contact Type Selection */}
           <fieldset className="space-y-2">
             <legend className="text-white font-semibold">{t('contactType')}</legend>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -194,13 +190,11 @@ export default function Formulario() {
             </div>
           </fieldset>
 
-          {/* Basic Information */}
           <div className="grid md:grid-cols-2 gap-4">
             {renderField({ label: t('nameAndLastName'), name: 'nombreApellido', required: true })}
             {renderField({ label: t('email'), name: 'email', type: 'email', required: true })}
           </div>
 
-          {/* Contact Specific Fields */}
           <div className="grid md:grid-cols-2 gap-4">
             {renderField({ label: t('url'), name: 'url' })}
             {contactType === 'persona'
@@ -213,7 +207,6 @@ export default function Formulario() {
               )}
           </div>
 
-          {/* Service Selection */}
           <div className="form-group">
             <label className="text-white font-semibold">
               {t('serviceLabel')} <span className="text-red-500">*</span>
@@ -234,7 +227,6 @@ export default function Formulario() {
             </select>
           </div>
 
-          {/* Message */}
           <div className="form-group">
             <label htmlFor="mensaje" className="text-white font-semibold">
               {t('messageLabel')}
@@ -249,7 +241,6 @@ export default function Formulario() {
             />
           </div>
 
-          {/* Status Messages */}
           {error && (
             <Alert variant="destructive">
               <AlertDescription>{error}</AlertDescription>
@@ -261,7 +252,6 @@ export default function Formulario() {
             </Alert>
           )}
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
